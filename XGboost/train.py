@@ -2,10 +2,11 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 import xgboost as xgb
 from Preprocessing.XGBpreproc import preprocess
-
+import pandas as pd
 
 # import data to dataframe
-requests_train = pd.read_csv('data/requests_train.csv')
+requests_train = pd.read_csv('../data/requests_train.csv')
+
 # Dataframe of categorical variables:
 categorical_val= list(requests_train.select_dtypes(include=[np.object]))
 categorical_val.remove('request_id')
