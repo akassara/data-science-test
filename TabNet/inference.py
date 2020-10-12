@@ -8,7 +8,7 @@ import time
 
 
 #import data
-requests_test = pd.read_csv('data/requests_test.csv')
+requests_test = pd.read_csv('../data/requests_test.csv')
 #Data preprocessing
 # Dataframe of categorical variables:
 categorical_val= list(requests_test.select_dtypes(include=[np.object]))
