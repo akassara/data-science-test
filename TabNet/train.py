@@ -6,11 +6,14 @@ import pandas as pd
 import numpy as np
 import torch
 
-
+if torch.cuda.is_available():
+    device='cuda'
+else:
+    device = 'cpu'
 
 
 # import data to dataframe
-requests_train = pd.read_csv('data/requests_train.csv')
+requests_train = pd.read_csv('../data/requests_train.csv')
 # Dataframe of categorical variables:
 categorical_val= list(requests_train.select_dtypes(include=[np.object]))
 categorical_val.remove('request_id')
@@ -28,12 +31,12 @@ X_train, y_train = preprocess_for_tabnet(X_train,y_train)
 X_val , y_val = preprocess_for_tabnet(X_val ,y_val)
 clf =  TabNetClassifier(optimizer_fn=torch.optim.Adam,
                        optimizer_params=dict(lr=1e-1))
-clf.device= 'cuda'
+clf.device= device
 weights = {0:1,1:10,2:10**2,3:10**3}
 clf.fit(X_train=X_train, y_train=y_train, ##Train features and train targets
                 X_valid=X_val, y_valid=y_val, ##Valid features and valid targets
                 weights=weights,
-                max_epochs=5,##Maxiµmum number of epochs during training
-                patience=2, ##Number of consecutive non improving epoch before early stopping
+                max_epochs=20,##Maxiµmum number of epochs during training
+                patience=5, ##Number of consecutive non improving epoch before early stopping
                 batch_size=16, ##Training batch size
                 )
