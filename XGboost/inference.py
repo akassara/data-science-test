@@ -8,7 +8,7 @@ import xgboost as xgb
 
 
 #import data
-requests_test = pd.read_csv('data/requests_test.csv')
+requests_test = pd.read_csv('../data/requests_test.csv')
 #Data preprocessing
 # Dataframe of categorical variables:
 categorical_val= list(requests_test.select_dtypes(include=[np.object]))
@@ -26,7 +26,7 @@ def competition_scorer(y_true, y_pred):
 
 #retrieve saved model
 best_model = xgb.Booster()
-PATH = '/data-science-test/model_zoo/xgb_model.model'
+PATH = '../model_zoo/xgb_model.model'
 best_model.load_model(PATH)
 print('The model has been loaded')
 #run inference

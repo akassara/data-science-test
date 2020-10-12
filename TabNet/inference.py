@@ -3,6 +3,7 @@ import numpy as np
 from Preprocessing.XGBpreproc import preprocess
 from Preprocessing.TABNETpreproc import preprocess_for_tabnet
 from pytorch_tabnet.tab_model import TabNetClassifier
+from XGboost.inference import competition_scorer
 import time
 
 
@@ -30,7 +31,7 @@ X_test_tab, y_test_tab = preprocess_for_tabnet(X_test,y_test)
 # retrieve model
 # Not working with version <3.7
 
-PATH = '/content/drive/My Drive/Dreamquark_challenge/model_zoo/TabNet_model.zip'
+PATH = '../model_zoo/TabNet_model.zip'
 clf = TabNetClassifier()
 clf.load_model(PATH)
 
